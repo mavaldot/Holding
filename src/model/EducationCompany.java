@@ -51,4 +51,12 @@ public class EducationCompany extends ServiceCompany implements ProculturaTax {
 		return ret;
 	}
 	
+	public String reportProculturaTax() {
+		String name = getName();
+		double tax = calculateProculturaTax();
+		
+		String rprt = name + " must pay " + tax + "% procultura tax.\n";
+		
+		return rprt;
+ 	}
 }

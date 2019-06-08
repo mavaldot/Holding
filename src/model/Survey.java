@@ -25,4 +25,17 @@ public class Survey {
 		return done;
 	}
 	
+	public double calculateAverage() {
+		double avg = 0;
+		double total = 0;
+		if(done) {
+			for(int ans : answers) {
+				total += ans;
+			}
+			avg = total/answers.length;
+		}
+		
+		return avg;
+	}
+	
 }

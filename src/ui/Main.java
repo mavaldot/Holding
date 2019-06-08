@@ -1,9 +1,8 @@
 package ui;
 
 import java.util.Scanner;
-
-import model.Company;
 import model.Holding;
+import model.*;
 
 public class Main {
 
@@ -19,9 +18,7 @@ public class Main {
 		Main m = new Main();
 		m.setUp();
 		m.menu();
-		
-		
-		
+
 	}
 	
 	public void init() {
@@ -39,8 +36,10 @@ public class Main {
 
 	
 	public void menu() {
+
+		Company c = new Holding("Johannios Holding", "1234FA", "Calle 5 # 47 - 121", "5554646", 20, 1000000, "1/1/2000", "Holding", "Esteban Ariza");
+		System.out.println(c instanceof Holding);
 		
-		System.out.println(holding instanceof Company);
 		boolean running = true;
 		
 		while(running) {
@@ -49,6 +48,12 @@ public class Main {
 			pln("Please choose an option:");
 			pln("1. Register a new company");
 			pln("2. Show all information");
+			pln("3. Display companies who pay the Procultura Tax");
+			pln("4. Display companies with a tree-planting program");
+			pln("5. Register a new survey");
+			pln("6. Display average consumer satisfaction for each service company");
+			pln("7. Add a new product to a company");
+			
 			
 			int choice = askInt();
 			
@@ -116,6 +121,7 @@ public class Main {
 					
 				case 4:
 					
+					double ec = askDouble("How much energy (in kilowatts) does the company use in one year?");
 					boolean s1 = askBoolean("Does the company offer consulting?");
 					boolean s2 = askBoolean("Does the company offer training?");
 					boolean s3 = askBoolean("Does the company offer custom software development?");
@@ -124,7 +130,7 @@ public class Main {
 					boolean s6 = askBoolean("Does the company offer platform as a service?");
 					boolean[] s = {s1, s2, s3, s4, s5, s6};
 					holding.registerTechCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
-							dateF, type, legalRep, s);
+							dateF, type, legalRep, ec, s);
 					break;
 					
 				case 5:
@@ -140,6 +146,14 @@ public class Main {
 					
 					holding.registerFabricationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep);
+					
+					break;
+					
+				case 7:
+					
+					
+					break;
+					
 				default:
 					
 					break;
@@ -156,13 +170,44 @@ public class Main {
 				
 			case 3:
 				
-				
+				pln(holding.reportProculturaTax());
 				break;
 				
 			case 4:
+				pln(holding.reportTrees());
+				break;
+				
+			case 5:
+				
+				String surveyNit = askString("Please enter the company's NIT");
+				pln(holding.showSurveyQuestions());
+				int res1 = askInt1to5("Please enter the response to question 1");
+				int res2 = askInt1to5("Please enter the response to question 2");
+				int res3 = askInt1to5("Please enter the response to question 3");
+				pln(holding.doSurvey(surveyNit, res1, res2, res3));
 				
 				break;
 				
+				
+			case 6:
+				
+				pln(holding.reportAvgConsumerSatisfaction());
+				break;
+				
+			case 7:
+				
+				String pNit = askString("Please enter the NIT of the company this product belongs to");
+				String name = askString("Please enter the name of the product");
+				String code = askString("Please enter the name of the product");
+				double waterQ = askDouble("Please enter the amount of water (in liters) needed to manufacture this product");
+				int units = askInt("Please enter the number of units in inventory");
+				
+				pln(holding.addProduct(pNit, name, code, waterQ, units));
+				break; 
+				
+			case 8:
+				
+				break;
 			default:
 					running = false;
 					break;
@@ -209,6 +254,28 @@ public class Main {
 			try {
 				ret = Integer.parseInt(str);
 				asking = false;
+			} catch (NumberFormatException e) {
+				pln("ERROR. Please enter a number.");
+			}
+
+		}
+		
+		return ret;
+	}
+	
+	public int askInt1to5(String prompt) {
+		boolean asking = true;
+		int ret = 0;
+		
+		while(asking) {
+			pln(prompt);
+			String str = s.nextLine();
+			try {
+				ret = Integer.parseInt(str);
+				if(ret >= 1 && ret <= 5)
+					asking = false;
+				else
+					pln("ERROR. Please enter a number between 1 and 5");
 			} catch (NumberFormatException e) {
 				pln("ERROR. Please enter a number.");
 			}

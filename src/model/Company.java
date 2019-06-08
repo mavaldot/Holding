@@ -58,5 +58,12 @@ public abstract class Company {
 		return ret;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public String getNit() {
+		return nit;
+	}
 	
 }

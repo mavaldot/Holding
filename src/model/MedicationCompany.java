@@ -47,6 +47,14 @@ public class MedicationCompany extends FabricationCompany implements TreePlanter
 		return trees;
 	}
 	
+	public String reportTrees() {
+		String name = getName();
+		int trees = calculateTrees();
+		
+		String rprt = name + " must plant " + trees + " trees.\n";
+		
+		return rprt;
+ 	}
 }
 		
 		

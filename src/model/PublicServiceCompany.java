@@ -1,6 +1,6 @@
 package model;
 
-public class PublicServiceCompany extends ServiceCompany {
+public class PublicServiceCompany extends ServiceCompany implements ProculturaTax {
 
 	private String serviceType;
 	private int totalSubs;
@@ -24,5 +24,26 @@ public class PublicServiceCompany extends ServiceCompany {
 		return ret;
 		
 	}
+	
+	public double calculateProculturaTax() {
+		double ret = .40 - ( (totalSubs - stratum1and2Subs) / totalSubs);
+		
+		if(ret < 0) {
+			ret = 0;
+		}
+		
+		ret *= 10;
+		
+		return ret;
+	}
+	
+	public String reportProculturaTax() {
+		String name = getName();
+		double tax = calculateProculturaTax();
+		
+		String rprt = name + " must pay " + tax + "% procultura tax.\n";
+		
+		return rprt;
+ 	}
 	
 }

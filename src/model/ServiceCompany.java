@@ -27,4 +27,35 @@ public class ServiceCompany extends Company{
 			}
 		}
 	}
+	
+	public double calculateAvgSatisfaction() {
+		
+		double totalAvg = 0;
+		int count = 0;
+		double avg = 0;
+		for(Survey s : surveys) {
+			if(s.getDone()) {
+				totalAvg += s.calculateAverage();
+				count++;
+			}
+		}
+		
+		if(count != 0) {
+			avg = totalAvg / count;
+		}
+		
+		return avg;
+	}
+	
+	public String reportAvgConsumerSatisfaction() {
+		
+		String rprt = "";
+		double avgS = calculateAvgSatisfaction();
+		
+		if(avgS > 0) {
+			rprt = getName() + "'s average consumer satisfaction: " + avgS + "\n";
+		}
+		
+		return rprt;
+	}
 }
