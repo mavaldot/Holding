@@ -42,9 +42,9 @@ public class Holding extends Company {
 	}
 	
 	public void registerTechCompany(String nam, String nt, String addr, String phone,int employeeN, double assetVal,
-									String dateF, String typ, String legalR) {
+									String dateF, String typ, String legalR, boolean[] s)   {
 
-		companies.add(new TechCompany(nam, nt, addr, phone, employeeN, assetVal, dateF, typ, legalR));
+		companies.add(new TechCompany(nam, nt, addr, phone, employeeN, assetVal, dateF, typ, legalR, s));
 	}
 	
 	public void registerPublicServiceCompany(	String nam, String nt, String addr, String phone,int employeeN, double assetVal,
@@ -63,6 +63,20 @@ public class Holding extends Company {
 		}
 		
 		return ret;
+	}
+
+	public void setUp() {
+		
+		
+	}
+	
+	public void doSurvey(int a, int b, int c) {
+		for (Company com : companies) {
+			if(com.getClass().getSuperclass().getSimpleName().equals("ServiceCompany")) {
+				ServiceCompany s = (ServiceCompany) com;
+				s.doSurvey(a, b, c);
+			}
+		}
 	}
 	
 }

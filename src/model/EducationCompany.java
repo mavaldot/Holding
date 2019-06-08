@@ -1,6 +1,6 @@
 package model;
 
-public class EducationCompany extends ServiceCompany {
+public class EducationCompany extends ServiceCompany implements ProculturaTax {
 
 	private int regNumber;
 	private int yearsAccredited;
@@ -35,6 +35,18 @@ public class EducationCompany extends ServiceCompany {
 		ret += "Education sector: " + educationSector + "\n"; 
 		ret += "Number of active students: " + activeStudents + "\n"; 
 		ret += "Number of stratum 1 and 2 students: " + stratum1and2Students + "\n"; 
+		
+		return ret;
+	}
+	
+	public double calculateProculturaTax() {
+		double ret = .20 - (stratum1and2Students/activeStudents);
+		
+		if(ret < 0) {
+			ret = 0;
+		}
+		
+		ret *= 10;
 		
 		return ret;
 	}

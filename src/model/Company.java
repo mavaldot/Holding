@@ -3,7 +3,7 @@ package model;
 public abstract class Company {
 
 	//Static attributes
-	public static final String[] organizationTypes = {	"AGRICULTURE, HUNTING, SILVICULTURE AND FISHING", "MINING AND QUARRYING",
+	public static final String[] TYPES = {	"AGRICULTURE, HUNTING, SILVICULTURE AND FISHING", "MINING AND QUARRYING",
 														"MANUFACTURING", "ELECTRICITY, GAS AND VAPOR", "CONSTRUCTION", "WHOLESALING AND RETAIL",
 														"TRANSPORTATION, STORAGE AND COMMUNICATION", "FINNANCIAL SECTOR", "SOCIAL/COMMUNAL" };
 	//Non-static attributes
@@ -35,8 +35,8 @@ public abstract class Company {
 	public String showTypes() {
 		String ret = "";
 		
-		for(int i = 0; i < organizationTypes.length; i++) {
-			ret += (i+1) + ". " + organizationTypes[i] + "\n"; 
+		for(int i = 0; i < TYPES.length; i++) {
+			ret += (i+1) + ". " + TYPES[i] + "\n"; 
 		}
 		
 		return ret;

@@ -1,6 +1,6 @@
 package model;
 
-public class MedicationCompany extends FabricationCompany {
+public class MedicationCompany extends FabricationCompany implements TreePlanter {
 
 	private String sanitationReg;
 	private boolean valid;
@@ -33,4 +33,20 @@ public class MedicationCompany extends FabricationCompany {
 		return ret;
 	}
 	
+	public int calculateTrees() {
+		double wc = calculateWaterConsumed();
+		int trees = 0;
+		
+		if(wc > 1 && wc < 140) 
+			trees = 6;
+		else if(wc < 800) 
+			trees = 25;
+		else 
+			trees = 200;
+		
+		return trees;
+	}
+	
 }
+		
+		

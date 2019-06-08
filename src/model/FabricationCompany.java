@@ -22,9 +22,23 @@ public class FabricationCompany extends Company{
 	public String toString() {
 		
 		String ret = super.toString();
+		ret += "PRODUCTS:\n";
+		
+		for(Product p : products) {
+			ret += p.toString();
+		}
 		
 		return ret;
 		
+	}
+	
+	public double calculateWaterConsumed() {
+		double wc = 0;
+		for(Product p : products) {
+			wc += p.waterConsumed();
+		}
+		
+		return wc;
 	}
 	
 }

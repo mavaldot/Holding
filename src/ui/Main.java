@@ -1,6 +1,8 @@
 package ui;
 
 import java.util.Scanner;
+
+import model.Company;
 import model.Holding;
 
 public class Main {
@@ -15,7 +17,10 @@ public class Main {
 	public static void main(String args[]) {
 		
 		Main m = new Main();
+		m.setUp();
 		m.menu();
+		
+		
 		
 	}
 	
@@ -25,7 +30,7 @@ public class Main {
 	}
 	
 	public void setUp() {
-		
+		holding.setUp();
 	}
 	
 	public void pln(String str) {
@@ -35,6 +40,7 @@ public class Main {
 	
 	public void menu() {
 		
+		System.out.println(holding instanceof Company);
 		boolean running = true;
 		
 		while(running) {
@@ -67,7 +73,7 @@ public class Main {
 				double 	assetValue = 	askDouble("Please enter the asset value of the company");
 				String dateF = 			askString("Please enter the date the company was founded");
 				int typeChoice = 		askInt("Please enter the type of organization. CHOICES:\n" + holding.showTypes()) ;
-				String type = Holding.organizationTypes[typeChoice + 1];
+				String type = 			Holding.TYPES[typeChoice + 1];
 				String 	legalRep = 		askString("Please enter the name of the company's legal representative");
 				
 				switch(comChoice) {
@@ -110,12 +116,20 @@ public class Main {
 					
 				case 4:
 					
+					boolean s1 = askBoolean("Does the company offer consulting?");
+					boolean s2 = askBoolean("Does the company offer training?");
+					boolean s3 = askBoolean("Does the company offer custom software development?");
+					boolean s4 = askBoolean("Does the company offer infrastructure as a service?");
+					boolean s5 = askBoolean("Does the company offer software as a service?");
+					boolean s6 = askBoolean("Does the company offer platform as a service?");
+					boolean[] s = {s1, s2, s3, s4, s5, s6};
 					holding.registerTechCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
-							dateF, type, legalRep);
+							dateF, type, legalRep, s);
 					break;
 					
 				case 5:
-					String servT = 	askString("Please enter the type of service");
+					String servT = 	askString("Please enter the type of service. OPTIONS:\n"
+							+ 					"1. Sewage\n2.Energy\n3. Aqueduct\n");
 					int totS = 		askInt("Please enter the number of subscribers");
 					int s12su = 	askInt("Please enter the number of stratum 1 and 2 subscribers");
 					holding.registerPublicServiceCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
@@ -131,6 +145,8 @@ public class Main {
 					break;
 				}
 				
+				pln("The company was registered	 successfully!");
+				
 				break;
 				
 			case 2:
@@ -139,6 +155,7 @@ public class Main {
 				break;
 				
 			case 3:
+				
 				
 				break;
 				

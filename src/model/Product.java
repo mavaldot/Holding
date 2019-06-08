@@ -14,4 +14,21 @@ public class Product {
 		units = unts;
 	}
 	
+	public String toString() {
+		String ret = "";
+		
+		ret += "Name: " + name + "\n";
+		ret += "Code: " + code + "\n";
+		ret += "Water Quantity consumed: " + waterQuantity + "\n";
+		ret += "Units: " + units + "\n";
+		
+		return ret;
+	}
+	
+	public double waterConsumed() {
+		double wc = units * waterQuantity;
+		
+		return wc;
+	}
+	
 }
