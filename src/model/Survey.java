@@ -11,6 +11,9 @@ public class Survey {
 	
 	public Survey() {
 		answers = new int[3];
+		answers[0] = 0;
+		answers[1] = 0;
+		answers[2] = 0;
 		done = false;
 	}
 	

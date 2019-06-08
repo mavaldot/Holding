@@ -40,13 +40,13 @@ public class EducationCompany extends ServiceCompany implements ProculturaTax {
 	}
 	
 	public double calculateProculturaTax() {
-		double ret = .20 - (stratum1and2Students/activeStudents);
+		double ret = .20 - ( (double) stratum1and2Students/activeStudents);
 		
 		if(ret < 0) {
 			ret = 0;
 		}
 		
-		ret *= 10;
+		ret *= 100;
 		
 		return ret;
 	}

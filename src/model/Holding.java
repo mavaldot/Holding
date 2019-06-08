@@ -2,13 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-public class Holding extends Company implements ProculturaTax {
+public class Holding extends Company {
 
-	public double calculateProculturaTax() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 	private ArrayList<Company> companies;
 	
 	public Holding(	String nam, String nt, String addr, String phone, int employeeN, double assetVal, 
@@ -16,6 +11,47 @@ public class Holding extends Company implements ProculturaTax {
 		
 		super(nam, nt, addr, phone, employeeN, assetVal, dateF, typ, legalR);
 		companies = new ArrayList<Company>();
+	}
+	
+	public void setUp() {
+		boolean[] s = {true, false, true, true, false};
+		companies.add(new TechCompany("JohanTech", "2", "Calle 5 # 120 - 25", "5556677", 10, 1000000, "1/1/1991", Company.TYPES[3], "Nahoj", 500, s));
+		companies.add(new MedicationCompany("Ariza Pharmaceuticals", "1", "Calle 5 # 5 - 25", "5556677", 10, 1000000, "1/1/1991", Company.TYPES[2], "Sebastian Giraldo",
+												"156463", true, "7/7/2022", "FABRICATION AND SELLING"));
+		companies.add(new EducationCompany("Johan University", "3", "Calle 8 # 6 - 16", "8936145", 50, 400000, "1/3/1998", Company.TYPES[8], "Esteban Ariza",
+											11334564, 20, 1, "Oetam Sedlav", "UNIVERSITY", 120, 20));
+		addProduct("1", "Dolex", "12345", 100, 20);
+		addProduct("1", "Ritalin", "2345", 60, 10);
+		addProduct("1", "Xanax", "7654", 30, 15);
+		
+		addBuilding("1", 3);
+		addBuilding("2", 4);
+		addBuilding("3", 5);
+		
+		addEmployee("1", "Johan Giraldo", "CEO", "johan@gmail.com");
+		addEmployee("2", "Esteban Ariza", "Pensador", "ariza@gmail.com");
+		
+		doSurvey("2", 4, 5, 5);
+		doSurvey("2", 5, 4, 5);
+		doSurvey("2", 5, 4, 5);
+		doSurvey("2", 4, 5, 5);
+		doSurvey("2", 2, 5, 3);
+		doSurvey("2", 4, 4, 5);
+		doSurvey("2", 4, 5, 4);
+		doSurvey("2", 5, 4, 4);
+		doSurvey("2", 4, 3, 5);
+		doSurvey("2", 4, 4, 4);
+		
+		doSurvey("3", 3, 5, 5);
+		doSurvey("3", 3, 4, 5);
+		doSurvey("3", 3, 3, 5);
+		doSurvey("3", 4, 5, 5);
+		doSurvey("3", 2, 5, 3);
+		doSurvey("3", 5, 1, 5);
+		doSurvey("3", 4, 1, 4);
+		doSurvey("3", 1, 5, 5);
+		doSurvey("3", 4, 3, 5);
+		doSurvey("3", 5, 5, 5);
 	}
 	
 	public void registerFoodCompany(String nam, String nt, String addr, String phone, int employeeN, double assetVal,
@@ -70,10 +106,7 @@ public class Holding extends Company implements ProculturaTax {
 		return ret;
 	}
 
-	public void setUp() {
 
-		
-	}
 	
 	public String showSurveyQuestions() {
 		int count = 1;
@@ -168,6 +201,38 @@ public class Holding extends Company implements ProculturaTax {
 		}
 		
 		return rprt;
+	}
+	
+	public String addBuilding(String nit, int floors) {
+		String ret = "The building could not be added\n";
+		boolean success = false;
+		for(Company com : companies) {
+			if(com.getNit().equals(nit)) {
+				success =com.addBuilding(floors);
+			}
+		}
+		
+		if(success) {
+			ret = "The building was added succesfully!\n";
+		}
+		
+		return ret;
+	}
+	
+	public String addEmployee(String nit, String name, String post, String email) {
+		String ret = "The employee could not be added\n";
+		boolean success = false;
+		for(Company com : companies) {
+			if(com.getNit().equals(nit)) {
+				success = com.addEmployee(name, post, email);
+			}
+		}
+		
+		if(success) {
+			ret = "The employee was added successfully!\n";
+		}
+		
+		return ret;
 	}
 	
 }

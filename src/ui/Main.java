@@ -2,7 +2,6 @@ package ui;
 
 import java.util.Scanner;
 import model.Holding;
-import model.*;
 
 public class Main {
 
@@ -36,9 +35,6 @@ public class Main {
 
 	
 	public void menu() {
-
-		Company c = new Holding("Johannios Holding", "1234FA", "Calle 5 # 47 - 121", "5554646", 20, 1000000, "1/1/2000", "Holding", "Esteban Ariza");
-		System.out.println(c instanceof Holding);
 		
 		boolean running = true;
 		
@@ -53,7 +49,9 @@ public class Main {
 			pln("5. Register a new survey");
 			pln("6. Display average consumer satisfaction for each service company");
 			pln("7. Add a new product to a company");
-			
+			pln("8. Add a building to a company");
+			pln("9. Add an employee to a company");
+			pln("10. ");
 			
 			int choice = askInt();
 			
@@ -89,21 +87,25 @@ public class Main {
 					String sanitationReg = 	askString("Please enter the company's sanitation registry");
 					boolean vld = 			askBoolean("Is the sanitation certificate currently valid?");
 					String expirationDate = askString("Please enter the sanitation certificate's expiration date");
-					String category = 		askString("Please enter the company's category.");
+					String category = 		askString("Please enter the company's category. OPTIONS:\n"
+							+ "- FABRICATE AND EXPORT\n-FABRICATE AND SELL\n-IMPORT AND SELL");
 					
 					holding.registerFoodCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 												dateF, type, legalRep, sanitationReg, vld, expirationDate, category, 
 												kosher, bpaCert);
+					pln("The company was registered	successfully!");
 					
 					break;
 				case 2:
 					String sanitationReg2 = 	askString("Please enter the company's sanitation registry");
 					boolean vld2 = 				askBoolean("Is the sanitation certificate currently valid?");
 					String expirationDate2 = 	askString("Please enter the sanitation certificate's expiration date");
-					String category2 = 			askString("Please enter the company's category.");
+					String category2 = 		askString("Please enter the company's category. OPTIONS:\n"
+							+ "- FABRICATE AND EXPORT\n-FABRICATE AND SELL\n-IMPORT AND SELL");
 				
 					holding.registerMedicationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, sanitationReg2, vld2, expirationDate2, category2);
+					pln("The company was registered	successfully!");
 				
 					break;
 					
@@ -117,6 +119,7 @@ public class Main {
 					int s12Stu = 	askInt("Please enter the number of stratum 1 ans 2 students in the educational institution");
 					holding.registerEducationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, regNum, yAcc, sRank, pName, sec, aStu, s12Stu);
+					pln("The company was registered	successfully!");
 					break;
 					
 				case 4:
@@ -131,35 +134,31 @@ public class Main {
 					boolean[] s = {s1, s2, s3, s4, s5, s6};
 					holding.registerTechCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, ec, s);
+					pln("The company was registered	successfully!");
 					break;
 					
 				case 5:
 					String servT = 	askString("Please enter the type of service. OPTIONS:\n"
-							+ 					"1. Sewage\n2.Energy\n3. Aqueduct\n");
+							+ 					"- Sewage\n- Energy\n- Aqueduct\n");
 					int totS = 		askInt("Please enter the number of subscribers");
 					int s12su = 	askInt("Please enter the number of stratum 1 and 2 subscribers");
 					holding.registerPublicServiceCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, servT, totS, s12su);
+					pln("The company was registered	successfully!");
 					break;
 					
 				case 6:
 					
 					holding.registerFabricationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep);
-					
-					break;
-					
-				case 7:
-					
+					pln("The company was registered	successfully!");
 					
 					break;
 					
 				default:
-					
+					pln("ERROR. Please enter a valid choice");
 					break;
 				}
-				
-				pln("The company was registered	 successfully!");
 				
 				break;
 				
@@ -207,7 +206,23 @@ public class Main {
 				
 			case 8:
 				
+				String bNit = askString("Please enter the NIT");
+				int floors = askInt("How many floors does the building have?");
+				pln(holding.addBuilding(bNit, floors));
 				break;
+				
+			case 9:
+				
+				String emNit = askString("Please enter the NIT of the company");
+				String emName = askString("Please enter the employee's name");
+				String emPost = askString("Please enter the employee's post");
+				String emEmail = askString("Please enter the employee's email");
+				pln(holding.addEmployee(emNit, emName, emPost, emEmail));
+				break;
+				
+			case 10:
+				
+				
 			default:
 					running = false;
 					break;

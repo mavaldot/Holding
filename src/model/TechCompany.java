@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TechCompany extends ServiceCompany implements TreePlanter {
 
-	public static String[] possibleServices = {"Consulting", "Training", "Custom Sorfware Development", 
+	public static String[] possibleServices = {"Consulting", "Training", "Custom Software Development", 
 												"Infrastructure as Service", "Software as Service", "Platform as Service"};
 	
 	private double energyConsumed;

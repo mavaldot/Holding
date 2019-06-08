@@ -2,13 +2,18 @@ package model;
 
 public class ServiceCompany extends Company{
 
+	public static final int MAXSURVEYS = 50;
 	private Survey[] surveys;
+	
 	
 	public ServiceCompany(	String nam, String nt, String addr, String phone, int employeeN, double assetVal, 
 							String dateF, String typ, String legalR) {
 		
 		super(nam, nt, addr, phone, employeeN, assetVal, dateF, typ, legalR);
-		surveys = new Survey[50];
+		surveys = new Survey[MAXSURVEYS];
+		for(int i = 0; i < MAXSURVEYS; i++) {
+			surveys[i] = new Survey();
+		}
 	
 	}
 	
@@ -21,11 +26,16 @@ public class ServiceCompany extends Company{
 	}
 	
 	public void doSurvey(int a, int b, int c) {
-		for(Survey s : surveys) {
-			if(!s.getDone()) {
-				s.doSurvey(a, b, c);
+		
+		boolean found = false;
+		for(int i = 0; i < MAXSURVEYS && !found; i++) {
+			
+			if(!surveys[i].getDone()) {
+				surveys[i].doSurvey(a, b, c);
+				found = true;
 			}
 		}
+		
 	}
 	
 	public double calculateAvgSatisfaction() {

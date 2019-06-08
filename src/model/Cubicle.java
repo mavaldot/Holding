@@ -6,9 +6,14 @@ public class Cubicle {
 	private String employeePost;
 	private String employeeEmail;
 	private int ext;
+	private boolean filled;
 	
 	public Cubicle(int ex) {
-		this.ext = ex;
+		ext = ex;
+		employeeName = "N/A";
+		employeePost = "N/A";
+		employeeEmail = "N/A";
+		filled = false;
 	}
 	
 	public String getEmployeeName() {
@@ -23,7 +28,15 @@ public class Cubicle {
 		employeeName = name;
 		employeePost = post;
 		employeeEmail = email;
+		filled = true;
 	}
 	
+	public boolean getFilled() {
+		return filled;
+	}
+	
+	public String getName() {
+		return employeeName;
+	}
 	
 }

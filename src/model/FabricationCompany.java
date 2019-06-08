@@ -22,7 +22,7 @@ public class FabricationCompany extends Company{
 	public String toString() {
 		
 		String ret = super.toString();
-		ret += "PRODUCTS:\n";
+		ret += "\nPRODUCTS:\n";
 		
 		for(Product p : products) {
 			ret += p.toString();
