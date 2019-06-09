@@ -28,8 +28,9 @@ public class Holding extends Company {
 		addBuilding("2", 4);
 		addBuilding("3", 5);
 		
-		addEmployee("1", "Johan Giraldo", "CEO", "johan@gmail.com");
-		addEmployee("2", "Esteban Ariza", "Pensador", "ariza@gmail.com");
+		addEmployee("1", "Nahoj", "CEO", "nahoj1234@gmail.com");
+		addEmployee("2", "Ariza", "Pensador", "ariza.correo.icesi@gmail.com");
+		addEmployee("3", "Pepe", "Asistente Personal", "pepe4321@gmail.com");
 		
 		doSurvey("2", 4, 5, 5);
 		doSurvey("2", 5, 4, 5);
@@ -37,7 +38,7 @@ public class Holding extends Company {
 		doSurvey("2", 4, 5, 5);
 		doSurvey("2", 2, 5, 3);
 		doSurvey("2", 4, 4, 5);
-		doSurvey("2", 4, 5, 4);
+		doSurvey("2", 4, 5, 4);	
 		doSurvey("2", 5, 4, 4);
 		doSurvey("2", 4, 3, 5);
 		doSurvey("2", 4, 4, 4);
@@ -230,6 +231,17 @@ public class Holding extends Company {
 		
 		if(success) {
 			ret = "The employee was added successfully!\n";
+		}
+		
+		return ret;
+	}
+	
+	public String search(String nit, String name, int mode) {
+		String ret = "ERROR. Could not find the company";
+		for(Company com : companies) {
+			if(com.getNit().equals(nit)) {
+				ret = com.search(name, mode);
+			}
 		}
 		
 		return ret;

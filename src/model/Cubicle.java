@@ -35,8 +35,4 @@ public class Cubicle {
 		return filled;
 	}
 	
-	public String getName() {
-		return employeeName;
-	}
-	
 }

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public abstract class Company {
 
 	//Static attributes
@@ -109,13 +107,52 @@ public abstract class Company {
 		return success;
 	}
 	
-	public String search(String name, int type) {
+	public String search(String name, int mode) {
 		
 		String ret = "";
 		int ext = 0;
 		
-		
-		
+		switch(mode) {
+		case 1:
+			ext = searchL(name);
+			break;
+			
+		case 2:
+			ext = searchZ(name);
+			break;
+			
+		case 3:
+			ext = searchX(name);
+			break;
+			
+		case 4:
+			ext = searchO(name);
+			break;
+			
+		case 5:
+			ext = searchE(name);
+			break;
+			
+		case 6:
+			ext = searchRowSpiral(name);
+			break;
+			
+		case 7:
+			ext = searchColumnSpiral(name);
+			break;
+			
+		default:
+			ext = -1;
+			break;
+		}
+		if(ext == -1) {
+			ret = "ERROR. Please enter a valid number\n";
+		} else if(ext == 0) {
+			ret = "ERROR. The employee could not be found\n";
+		} else {
+			ret = name + "'s extension is: " + ext + "\n";
+		}
+			
 		return ret;
 		
 	}
@@ -198,7 +235,7 @@ public abstract class Company {
 				ext = building[0][j].getExt();
 			if(building[building.length - 1][j].getEmployeeName().equals(name))
 				ext = building[building.length - 1][j].getExt();
-			if(building[building.length / 2 + 1][j].getEmployeeName().equals(name))
+			if(building[building.length / 2][j].getEmployeeName().equals(name))
 				ext = building[building.length - 1][j].getExt();
 		}
 		
@@ -243,52 +280,51 @@ public abstract class Company {
 		
 		int ext = 0;
 		int count = 0;
-		boolean vertical = false;
+		boolean vertical = true;
+		boolean reverse = false;
 		int total = building.length * NUMCUBICLES;
+		int skip = 0;
 
-		int startX = 0;
-		int endX = building.length;
-		int stepX = 0;
-		
-		int startY = 0;
-		int endY = NUMCUBICLES;
-		int stepY = 0;
-		
-		int paddingX = 0;
-		int paddingY = 0;
-		
-		int stepper = 1;
 		
 		while(count < total) {
 			
-			if(vertical) {
-				for(stepX = startX; stepX < (endX - paddingX*stepper); stepX += stepper) {
-					if(building[stepX][startY].getEmployeeName().equals(name))
-						ext = building[stepX][startY].getExt();
-					count++;
+			if(reverse) {
+				if(vertical) {
+					for(int i = building.length - 1 - skip; i >= 0 + skip; i--) {
+						if(building[i][NUMCUBICLES - 1 - skip].getEmployeeName().equals(name))
+							ext = building[i][NUMCUBICLES - 1 - skip].getExt();
+						count++;
+					}
+					
+				} else {
+					for(int j = NUMCUBICLES - 2 - skip; j > 0 + skip; j--) {
+						if(building[skip][j].getEmployeeName().equals(name))
+							ext = building[skip][j].getExt();
+						count++;
+					}
+					skip += 1;
+					reverse = !reverse;
 				}
-				endX = startX;
-				startX = stepX;
-				
 			} else {
-				for(stepY = startY + stepper; stepY < (endY - paddingY*stepper); stepY += stepper) {
-					if(building[startX][stepY].getEmployeeName().equals(name))
-						ext = building[stepX][stepY].getExt();
-					count++;
+				if(vertical) {
+					for(int i = 0 + skip; i < building.length - skip; i++) {
+						if(building[i][skip].getEmployeeName().equals(name))
+							ext = building[i][skip].getExt();
+						count++;
+					}
+					
+				} else {
+					for(int j = 1 + skip; j < NUMCUBICLES - 2 - skip; j++) {
+						if(building[building.length - 1 - skip][j].getEmployeeName().equals(name))
+							ext = building[building.length - 1 - skip][j].getExt();
+						count++;
+					}
+					reverse = !reverse;
 				}
-				endY = startY;
-				startY = stepY;
-				stepper *= -1;
 			}
-			
 			vertical = !vertical;
 		}
 		return ext;
 	}
-
-	
-	
-	
-	
 	
 }

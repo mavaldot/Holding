@@ -51,7 +51,8 @@ public class Main {
 			pln("7. Add a new product to a company");
 			pln("8. Add a building to a company");
 			pln("9. Add an employee to a company");
-			pln("10. ");
+			pln("10. Search for an employee's extension");
+			pln("11. Exit");
 			
 			int choice = askInt();
 			
@@ -88,12 +89,12 @@ public class Main {
 					boolean vld = 			askBoolean("Is the sanitation certificate currently valid?");
 					String expirationDate = askString("Please enter the sanitation certificate's expiration date");
 					String category = 		askString("Please enter the company's category. OPTIONS:\n"
-							+ "- FABRICATE AND EXPORT\n-FABRICATE AND SELL\n-IMPORT AND SELL");
+							+ "-FABRICATE AND EXPORT\n-FABRICATE AND SELL\n-IMPORT AND SELL");
 					
 					holding.registerFoodCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 												dateF, type, legalRep, sanitationReg, vld, expirationDate, category, 
 												kosher, bpaCert);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 					
 					break;
 				case 2:
@@ -105,7 +106,7 @@ public class Main {
 				
 					holding.registerMedicationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, sanitationReg2, vld2, expirationDate2, category2);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 				
 					break;
 					
@@ -119,7 +120,7 @@ public class Main {
 					int s12Stu = 	askInt("Please enter the number of stratum 1 ans 2 students in the educational institution");
 					holding.registerEducationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, regNum, yAcc, sRank, pName, sec, aStu, s12Stu);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 					break;
 					
 				case 4:
@@ -134,7 +135,7 @@ public class Main {
 					boolean[] s = {s1, s2, s3, s4, s5, s6};
 					holding.registerTechCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, ec, s);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 					break;
 					
 				case 5:
@@ -144,14 +145,14 @@ public class Main {
 					int s12su = 	askInt("Please enter the number of stratum 1 and 2 subscribers");
 					holding.registerPublicServiceCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep, servT, totS, s12su);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 					break;
 					
 				case 6:
 					
 					holding.registerFabricationCompany(comName, nit, address, phoneNum, employeeNum, assetValue,
 							dateF, type, legalRep);
-					pln("The company was registered	successfully!");
+					pln("The company was registered successfully");
 					
 					break;
 					
@@ -197,7 +198,7 @@ public class Main {
 				
 				String pNit = askString("Please enter the NIT of the company this product belongs to");
 				String name = askString("Please enter the name of the product");
-				String code = askString("Please enter the name of the product");
+				String code = askString("Please enter the code of the product");
 				double waterQ = askDouble("Please enter the amount of water (in liters) needed to manufacture this product");
 				int units = askInt("Please enter the number of units in inventory");
 				
@@ -222,9 +223,22 @@ public class Main {
 				
 			case 10:
 				
+				String sNit = askString("Please enter the company's NIT");
+				String sName = askString("Please enter the employee's name");
+				int sChoice = askInt("Please enter the type of search. OPTIONS:\n"
+						+ "1. L SEARCH\n2. Z SEARCH\n3. X SEARCH\n4. O SEARCH\n5. E SEARCH\n6. ROW SPIRAL SEARCH\n7. COLUMN SPIRAL SEARCH\n");
+				pln(holding.search(sNit, sName, sChoice));
+				
+				break;
+				
+			case 11:
+				
+				pln("Goodbye!");
+				running = false;
+				break;
 				
 			default:
-					running = false;
+					pln("ERROR. Please enter a valid choice.");
 					break;
 				
 			}
