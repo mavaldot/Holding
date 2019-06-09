@@ -3,15 +3,29 @@ package ui;
 import java.util.Scanner;
 import model.Holding;
 
+/**
+ * The main class. Handles the input and output.
+ * 
+ * @author Mateo Valdes
+ *
+ */
 public class Main {
 
 	private Scanner s;
 	private Holding holding;
 	
+	/**
+	 * Class constructor. Calls the init method to initialize all the variable
+	 */
 	public Main() {
 		init();
 	}
 	
+	/**
+	 * The main method. This method serves as the entry point of the program.
+	 * 
+	 * @param args The command line arguments
+	 */
 	public static void main(String args[]) {
 		
 		Main m = new Main();
@@ -20,20 +34,40 @@ public class Main {
 
 	}
 	
+	/**
+	 * Initializes the scanner and the holding needed for the program to work properly. Also adds the building
+	 * and the employee that the holding requires
+	 * <p>
+	 * post: A new buidling is added to the holding <br>
+	 * post: A new employee is added to holding
+	 */
 	public void init() {
 		s = new Scanner(System.in);
-		holding = new Holding("Johannios Holding", "1234FA", "Calle 5 # 47 - 121", "5554646", 20, 1000000, "1/1/2000", "Holding", "Esteban Ariza");
+		holding = new Holding("Johannio's Holding", "1234FA", "Calle 5 # 47 - 121", "5554646", 20, 1000000, "1/1/2000", "FINANCIAL SECTOR", "Esteban Ariza");
+		holding.addBuilding(3);
+		holding.addEmployee("Felipe", "Investor", "felipev67890@gmail.com");
 	}
 	
+	/**
+	 * Calls the setUp method of the holding
+	 */
 	public void setUp() {
 		holding.setUp();
 	}
 	
+	/**
+	 * Prints a string in the console
+	 * 
+	 * @param str The string that will be printed in the console
+	 */
 	public void pln(String str) {
 		System.out.println(str);
 	}
 
-	
+	/**
+	 * Displays all the options available to the user and handles the input and the output of the program. Quits when <code> running = false </code>
+	 * 
+	 */
 	public void menu() {
 		
 		boolean running = true;
@@ -248,6 +282,12 @@ public class Main {
 		
 	}
 	
+	/**
+	 * Asks the user to enter a string and returns it for later use
+	 * 
+	 * @param prompt The prompt that will be displayed to the user
+	 * @return The string entered by the user
+	 */
 	public String askString(String prompt) {
 		pln(prompt);
 		String ret = s.nextLine();
@@ -255,6 +295,14 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Asks the user to enter an int and returns it for later use
+
+	 * 
+	 * @param prompt The prompt that will be displayed to the user
+	 * @return The int entered by the user
+	 * @throws NumberFormatException
+	 */
 	public int askInt(String prompt) {
 		boolean asking = true;
 		int ret = 0;
@@ -274,6 +322,12 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Returns an int entered by a user.
+	 * 
+	 * @return The int entered by the user
+	 * @throws NumberFormatException
+	 */
 	public int askInt() {
 		boolean asking = true;
 		int ret = 0;
@@ -292,6 +346,14 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Asks the user to enter an int and returns it for later use. The int must be between 1 and 5.
+
+	 * 
+	 * @param prompt The prompt that will be displayed to the user
+	 * @return The int between 1 and 5 entered by the user
+	 * @throws NumberFormatException
+	 */
 	public int askInt1to5(String prompt) {
 		boolean asking = true;
 		int ret = 0;
@@ -314,6 +376,14 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Asks the user to enter a double and returns it for later use. 
+
+	 * 
+	 * @param prompt The prompt that will be displayed to the user
+	 * @return The double entered by the user
+	 * @throws NumberFormatException
+	 */
 	public double askDouble(String prompt) {
 		boolean asking = true;
 		double ret = 0;
@@ -333,6 +403,15 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Asks the user a question. If the answers is Yes, returns <code> true </code>. If the answers is false, returns
+	 * <code> false </code>
+
+	 * 
+	 * @param prompt The question that will be displayed to the user
+	 * @return True or false depending on the user's answer to the question
+	 * @throws NumberFormatException
+	 */
 	public boolean askBoolean(String prompt) {
 		boolean asking = true;
 		int choice = 0;

@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Models a company (abstract)
+ * @author Mateo Valdes
+ *
+ */
 public abstract class Company {
 
 	//Static attributes
@@ -21,6 +26,19 @@ public abstract class Company {
 	
 	private Cubicle[][] building;
 	
+	/**
+	 * Class constructor
+	 * 
+	 * @param nam The company's name
+	 * @param nt The company's NIT
+	 * @param addr The company's address
+	 * @param phone The company's phone number
+	 * @param employeeN The company's number of employees
+	 * @param assetVal The company's asset value
+	 * @param dateF The date that the company was founded
+	 * @param typ The type of company
+	 * @param legalR The name of the legal representative
+	 */
 	public Company(	String nam, String nt, String addr, String phone, int employeeN, double assetVal, 
 					String dateF, String typ, String legalR) {
 		
@@ -36,6 +54,11 @@ public abstract class Company {
 		
 	}
 	
+	/**
+	 * Shows all the types of organizations defined in this class
+	 * 
+	 * @return A list of all the types of organizations
+	 */
 	public String showTypes() {
 		String ret = "";
 		
@@ -46,6 +69,12 @@ public abstract class Company {
 		return ret;
 	}
 	
+	/**
+	 * Returns a String with all the important available attributes and information of this company.
+	 * 
+	 * 
+	 * @return A String with all the available attributes of this company
+	 */
 	public String toString() {
 		String ret = "";
 		
@@ -62,14 +91,31 @@ public abstract class Company {
 		return ret;
 	}
 	
+	/**
+	 * Returns the name of the company
+	 * 
+	 * @return A string containing the name of the company
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Returns the nit of the company
+	 * 
+	 * @return A string containing the nit of the company
+	 */
 	public String getNit() {
 		return nit;
 	}
 	
+	/**
+	 * Adds a building to the company if it has not been added yet. The building is represented by a matrix of 
+	 * cubicles.
+	 * 
+	 * @param floors The number of floors in the building
+	 * @return True if the building was added successfully, false if it was not
+	 */
 	public boolean addBuilding(int floors) {
 		boolean success = false;
 		if(building == null) {
@@ -90,6 +136,14 @@ public abstract class Company {
 
 	}
 	
+	/**
+	 * Adds a new employee to the building (a matrix of cubicles). 
+	 * 
+	 * @param name The name of the employee
+	 * @param post The post of the employee
+	 * @param email The email of the employee
+	 * @return True if the employee was added successfully, false if the employee could not be added
+	 */
 	public boolean addEmployee(String name, String post, String email) {
 		boolean success = false;
 		
@@ -107,6 +161,13 @@ public abstract class Company {
 		return success;
 	}
 	
+	/**
+	 * Searches for the extension of an employee given their name
+	 * 
+	 * @param name The name of the employee
+	 * @param mode The mode of the search (L, Z, X, O, E, row spiral and column spiral)
+	 * @return A String containing employee's extension. If there is an error, the string notifies the user.
+	 */
 	public String search(String name, int mode) {
 		
 		String ret = "";
@@ -157,6 +218,13 @@ public abstract class Company {
 		
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in an L shape (first row and first column) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchL(String name) {
 		
 		int ext = 0;
@@ -174,6 +242,13 @@ public abstract class Company {
 		return ext;
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in a Z shape (first and last rows and the right to left diagonal) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchZ(String name) {
 		
 		int ext = 0;
@@ -181,8 +256,8 @@ public abstract class Company {
 		for(int i = 0; i < building.length; i++) {
 			if(building[0][i].getEmployeeName().equals(name))
 				ext = building[0][i].getExt();
-			if(building[i][i].getEmployeeName().equals(name))
-				ext = building[i][i].getExt();
+			if(building[i][building.length - 1 - i].getEmployeeName().equals(name))
+				ext = building[i][building.length - 1 - i].getExt();
 			if(building[building.length - 1][i].getEmployeeName().equals(name))
 				ext = building[building.length - 1][i].getExt();
 		}
@@ -191,6 +266,13 @@ public abstract class Company {
 		
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in an X shape (both diagonals) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchX(String name) {
 		int ext = 0;
 		
@@ -204,6 +286,13 @@ public abstract class Company {
 		return ext;
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in an O shape (first and last rows and first and last columns) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchO(String name) {
 		
 		int ext = 0;
@@ -226,6 +315,13 @@ public abstract class Company {
 		return ext;
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in an E shape (first, middle and last rows) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchE(String name) {
 		
 		int ext = 0;
@@ -247,6 +343,13 @@ public abstract class Company {
 		return ext;
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in a row spiral (starting from left to right) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchRowSpiral(String name) {
 		
 		int ext = 0;
@@ -276,6 +379,13 @@ public abstract class Company {
 		return ext;
 	}
 	
+	/**
+	 * Searches the building (a matrix of Cubicles) in a spiral shape (starting from the first column) for an employee and returns their extension.
+	 * If the employee is not found it returns 0.
+	 * 
+	 * @param name The name of the employee
+	 * @return The extension of the employee
+	 */
 	public int searchColumnSpiral(String name) {
 		
 		int ext = 0;
